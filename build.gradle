@@ -1,0 +1,124 @@
+description = "Java Binding for Marvel API"
+
+configure(allprojects) {
+    apply plugin: "java"
+    apply plugin: "idea"
+    apply plugin: "eclipse"
+    apply plugin: "jetty"
+
+    group = "com.ryonday.marvel"
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        ver_slf4j = "1.7.6"
+        ver_logback = "1.1.1"
+        ver_guava = "16.0.1"
+        ver_commons_lang = "3.2.1"
+        ver_jersey = "2.6"
+        ver_jackson = "2.3.1"
+        ver_jackson_annotations = "2.3.0"
+        ver_junit = "4.11"
+        ver_guice = "4.0-beta"
+    }
+
+    compileJava {
+        sourceCompatibility=JavaVersion.VERSION_1_7
+        targetCompatibility=JavaVersion.VERSION_1_7
+    }
+    compileTestJava {
+        sourceCompatibility=JavaVersion.VERSION_1_7
+        targetCompatibility=JavaVersion.VERSION_1_7
+    }
+
+
+// Emulation of Maven's "provided" scope.
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+
+        exclude group: "log4j"
+        exclude group: "commons-logging"
+    }
+
+    configurations {
+        provided
+    }
+
+    sourceSets {
+        main {
+            compileClasspath += configurations.provided
+        }
+        test {
+            compileClasspath += configurations.provided
+            runtimeClasspath += configurations.provided
+        }
+    }
+
+    dependencies {
+
+        // Test Dependencies
+        testCompile "junit:junit:$ver_junit"
+        testCompile "ch.qos.logback:logback-classic:$ver_logback"
+        // Logging dependencies
+        compile "org.slf4j:slf4j-api:$ver_slf4j"
+
+
+        // General Java dependencies
+        compile "joda-time:joda-time:2.3"
+        compile "org.apache.commons:commons-lang3:$ver_commons_lang"
+        compile "com.google.guava:guava:$ver_guava"
+        compile "com.google.code.findbugs:jsr305:1.3.9"
+
+        // Jackson JSON Parser
+
+    }
+
+    test {
+        useJUnit()
+
+        maxHeapSize = "600M"
+
+        jvmArgs("-XX:MaxPermSize=256M")
+
+        enableAssertions = true
+    }
+
+    jettyRun {
+        contextPath = 'social-media-demo'
+        httpPort = 8081
+        stopPort = 8091
+        stopKey = 'stop'
+    }
+
+    jettyStop {
+        httpPort = 8081
+        stopPort = 8091
+        stopKey = 'stop'
+    }
+
+}
+
+project("marvel-impl") {
+    description = "Jersey/Jackson implementation of the Marvel API"
+    dependencies {
+        compile project(":marvel-api")
+        compile "org.slf4j:jul-to-slf4j:$ver_slf4j"
+
+        compile "com.fasterxml.jackson.core:jackson-core:$ver_jackson",
+                "com.fasterxml.jackson.core:jackson-databind:$ver_jackson",
+                "com.fasterxml.jackson.core:jackson-annotations:$ver_jackson_annotations",
+                "com.fasterxml.jackson.datatype:jackson-datatype-guava:$ver_jackson",
+                "com.fasterxml.jackson.datatype:jackson-datatype-joda:$ver_jackson",
+                "com.fasterxml.jackson.module:jackson-module-afterburner:$ver_jackson",
+                "com.fasterxml.jackson.module:jackson-module-guice:$ver_jackson",
+                "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:$ver_jackson",
+                "org.glassfish.jersey.core:jersey-client:$ver_jersey"
+
+        compile "com.google.inject:guice:$ver_guice"
+    }
+}
+
+
+
