@@ -1,6 +1,6 @@
 # Marvel API for Java #
 
-Mostly just to practice learning Jackson and Jersey.
+A Java Jackson/Jersey implementation of the Marvel Comic API.
 
 ## ToDo ##
 
