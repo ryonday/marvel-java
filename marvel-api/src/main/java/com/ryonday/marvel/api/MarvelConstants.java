@@ -44,6 +44,28 @@ public final class MarvelConstants {
     /** The query parameter used to return only resources the name(s) of which begin with the specified String. */
     public final static String query_nameStart = "nameStartsWith";
 
+    /** The query parameter used to return only creators with the given first name */
+    public final static String query_firstName = "firstName";
+
+    /** The query parameter used to return only creators with the given middle name */
+    public final static String query_middleName = "middleName";
+
+    /** The query parameter used to return only creators with the given first name */
+    public final static String query_lastName = "lastName";
+
+    /** The query parameter used to return only creators with the given suffix/title */
+    public final static String query_suffix = "suffix";
+
+    /** The query parameter used to return only creators whose first names start with a given {@code String}. */
+    public final static String query_firstNameStartsWith = "firstNameStartsWith";
+
+    /** The query parameter used to return only creators whose first middle start with a given {@code String}. */
+    public final static String query_middleNameStartsWith = "middleNameStartsWith";
+
+    /** The query parameter used to return only creators whose last names start with a given {@code String}. */
+    public final static String query_lastNameStartsWith = "lastNameStartsWith";
+
+
     /** The query parameter used to return only resources with the given name. */
     public final static String query_name = "name";
 
@@ -127,6 +149,9 @@ public final class MarvelConstants {
 
     /** The query parameter used to filter a series by publication frequency */
     public final static String query_seriesType = "seriesType";
+
+    /** The query parameter used to filter a series by comic format */
+    public final static String query_contains = "contains";
 
 
 
