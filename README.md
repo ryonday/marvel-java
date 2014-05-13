@@ -13,4 +13,4 @@ A Java Jackson/Jersey implementation of the Marvel Comic API.
 * [Marvel API Definition](http://developer.marvel.com/docs#!/public/getCreatorCollection_get_0)
 * [Get an API Key](https://developer.marvel.com/signup)
 * [Swagger API Docs](http://gateway.marvel.com/docs)
-* [Grade Documentation](http://www.gradle.org/documentation)
+* [Gradle Documentation](http://www.gradle.org/documentation)
